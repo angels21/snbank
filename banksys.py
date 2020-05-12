@@ -74,23 +74,26 @@ def loginloop():
                         file.write(datetime.datetime.now().ctime())
                         file.write("\n")
                         file.close()
-                        print("The ten digit account number for the newly created customer is", accountNumber)
+                        print("The customer details has been saved and his/her NUBAN number is: ",accountNumber)
                         create_again = str(input("To create another account, type 'yes'. To return to the login page type 'no'. \n"))
                         if create_again == "yes":
                             createloop()
                     elif option == "2":
-                        #print("type the customer account number to print out his details")
-                        #line: str = input("account number:")
-                        file = open('customer.txt', 'r')
-                        print
-                        file.read()
-
+                        print("please enter account number to search for a customer details")
+                        lookup = input()
+                        with open('customer.txt', 'r') as myFile:
+                            for num, line in enumerate(myFile, 1):
+                                if lookup in line:
+                                    print('This is the details of the customer:', line)
+                                    createloop()
                     elif option == "3":
                         loginloop()
                     else:
                         print("Incorrect entry, type '1' to create bank account, type '2' to check account details or type '3' to logout" )
                         createloop()
                 createloop()
+    elif login == "no":
+        sys.exit("The application is now closed")
 loginloop()
 
 #file.close()
